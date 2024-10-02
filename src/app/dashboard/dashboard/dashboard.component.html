@@ -1,0 +1,26 @@
+<h1>Dashboard</h1>
+
+<div class="stats-container">
+  <div class="stat-card">
+    <h3>Total de Niños Registrados</h3>
+    <p>{{ totalChildren }}</p>
+  </div>
+  <div class="stat-card">
+    <h3>Total de Municipios</h3>
+    <p>{{ totalMunicipalities }}</p>
+  </div>
+  <div class="stat-card">
+    <h3>Total de Vacunas Aplicadas</h3>
+    <p>{{ totalVaccines }}</p>
+  </div>
+  <div class="stat-card">
+    <h3>Edad Promedio por Municipio</h3>
+    <p>{{ averageAge }} años</p>
+  </div>
+</div>
+
+<div class="quick-links">
+  <button routerLink="/children">Gestión de Niños</button>
+  <button routerLink="/municipalities">Gestión de Municipios</button>
+  <button routerLink="/vaccines/apply">Aplicación de Vacunas</button>
+</div>

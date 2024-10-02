@@ -1,0 +1,36 @@
+<h1>Gestión de Municipios</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre del Municipio</th>
+      <th>Departamento</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let municipality of municipalities">
+      <td>{{ municipality.name }}</td>
+      <td>{{ municipality.department.name }}</td>
+      <td>
+        <button (click)="editMunicipality(municipality.id)">Editar</button>
+        <button (click)="deleteMunicipality(municipality.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<form (submit)="saveMunicipality()">
+  <h3>{{ editingMunicipality ? 'Editar Municipio' : 'Agregar Municipio' }}</h3>
+  <div>
+    <label>Nombre del Municipio:</label>
+    <input type="text" [(ngModel)]="municipalityForm.name" name="name" required>
+  </div>
+  <div>
+    <label>Departamento:</label>
+    <select [(ngModel)]="municipalityForm.departmentId" name="departmentId" required>
+      <option *ngFor="let department of departments" [value]="department.id">{{ department.name }}</option>
+    </select>
+  </div>
+  <button type="submit">{{ editingMunicipality ? 'Actualizar' : 'Agregar' }}</button>
+</form>

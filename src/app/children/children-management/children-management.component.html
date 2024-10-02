@@ -1,0 +1,54 @@
+<h1>Gestión de Niños</h1>
+
+<div class="filter">
+  <label for="municipalityFilter">Filtrar por Municipio</label>
+  <select id="municipalityFilter" [(ngModel)]="selectedMunicipality" (change)="filterChildrenByMunicipality()">
+    <option *ngFor="let municipality of municipalities" [value]="municipality.id">{{ municipality.name }}</option>
+  </select>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Fecha de Nacimiento</th>
+      <th>Municipio</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let child of children">
+      <td>{{ child.name }}</td>
+      <td>{{ child.birthDate | date }}</td>
+      <td>{{ child.municipality.name }}</td>
+      <td>
+        <button (click)="editChild(child.id)">Editar</button>
+        <button (click)="deleteChild(child.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="pagination">
+  <button (click)="previousPage()">Anterior</button>
+  <button (click)="nextPage()">Siguiente</button>
+</div>
+
+<form (submit)="saveChild()">
+  <h3>{{ editingChild ? 'Editar Niño' : 'Agregar Niño' }}</h3>
+  <div>
+    <label>Nombre:</label>
+    <input type="text" [(ngModel)]="childForm.name" name="name" required>
+  </div>
+  <div>
+    <label>Fecha de Nacimiento:</label>
+    <input type="date" [(ngModel)]="childForm.birthDate" name="birthDate" required>
+  </div>
+  <div>
+    <label>Municipio:</label>
+    <select [(ngModel)]="childForm.municipalityId" name="municipalityId" required>
+      <option *ngFor="let municipality of municipalities" [value]="municipality.id">{{ municipality.name }}</option>
+    </select>
+  </div>
+  <button type="submit">{{ editingChild ? 'Actualizar' : 'Agregar' }}</button>
+</form>

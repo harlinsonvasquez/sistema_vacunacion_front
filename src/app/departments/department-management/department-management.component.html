@@ -1,0 +1,28 @@
+<h1>Gestión de Departamentos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre del Departamento</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let department of departments">
+      <td>{{ department.name }}</td>
+      <td>
+        <button (click)="editDepartment(department.id)">Editar</button>
+        <button (click)="deleteDepartment(department.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<form (submit)="saveDepartment()">
+  <h3>{{ editingDepartment ? 'Editar Departamento' : 'Agregar Departamento' }}</h3>
+  <div>
+    <label>Nombre del Departamento:</label>
+    <input type="text" [(ngModel)]="departmentForm.name" name="name" required>
+  </div>
+  <button type="submit">{{ editingDepartment ? 'Actualizar' : 'Agregar' }}</button>
+</form>

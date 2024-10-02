@@ -1,0 +1,18 @@
+<h1>Estadísticas de Vacunación</h1>
+
+<div>
+  <label for="municipalityFilter">Filtrar por Municipio</label>
+  <select id="municipalityFilter" [(ngModel)]="selectedMunicipalityId" (change)="loadStatistics()">
+    <option *ngFor="let municipality of municipalities" [value]="municipality.id">{{ municipality.name }}</option>
+  </select>
+</div>
+
+<div>
+  <h2>Edad Promedio en el Municipio</h2>
+  <p>{{ averageAge }} años</p>
+</div>
+
+<div>
+  <h2>Niños Vacunados en el Municipio</h2>
+  <p>{{ vaccinatedChildren }} niños</p>
+</div>

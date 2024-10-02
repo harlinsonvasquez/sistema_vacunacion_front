@@ -1,0 +1,28 @@
+<h1>Aplicación de Vacunas</h1>
+
+<form (submit)="applyVaccine()">
+  <div>
+    <label for="child">Seleccionar Niño</label>
+    <select id="child" [(ngModel)]="selectedChildId" name="child" required>
+      <option *ngFor="let child of children" [value]="child.id">{{ child.name }}</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="vaccine">Seleccionar Vacuna</label>
+    <select id="vaccine" [(ngModel)]="selectedVaccineId" name="vaccine" required>
+      <option *ngFor="let vaccine of vaccines" [value]="vaccine.id">{{ vaccine.name }}</option>
+    </select>
+  </div>
+
+  <button type="submit">Aplicar Vacuna</button>
+</form>
+
+<div *ngIf="appliedVaccines.length">
+  <h2>Historial de Vacunas Aplicadas</h2>
+  <ul>
+    <li *ngFor="let vaccine of appliedVaccines">
+      Vacuna: {{ vaccine.name }} - Fecha: {{ vaccine.dateApplied | date }}
+    </li>
+  </ul>
+</div>
