@@ -6,13 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DepartmentService {
-  // La URL de tu API, que incluye el contexto `/api/v1` y el endpoint `/departments`
+  
   public apiUrl = 'http://localhost:8080/api/v1/departments'; 
 
   constructor(private http: HttpClient) { }
 
   getAllDepartments(page: number = 0, size: number = 10): Observable<any> {
-    // Utilizando parámetros para paginación
+   
     return this.http.get<any>(`${this.apiUrl}?page=${page}&size=${size}`);
   }
 

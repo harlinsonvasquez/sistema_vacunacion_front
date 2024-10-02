@@ -30,9 +30,9 @@ export class ChildrenManagementComponent implements OnInit {
   loadChildren(page: number = 0, size: number = 10): void {
     this.childService.getAllChildren(page, size).subscribe(data => {
       this.children = data.content; 
-      // Asumiendo que la respuesta contiene una propiedad 'content' que tiene los niños
+     console.log(data);
       
-      this.totalPages = data.totalPages; // Esto es si tu backend devuelve el número total de páginas
+      this.totalPages = data.totalPages; 
     }, error => {
       console.error('Error loading children:', error);
     });
@@ -42,6 +42,7 @@ export class ChildrenManagementComponent implements OnInit {
   loadMunicipalities() {
     this.municipalityService.getAllMunicipalities().subscribe(data => {
       this.municipalities = data.content;
+      console.log(data);
     });
   }
 

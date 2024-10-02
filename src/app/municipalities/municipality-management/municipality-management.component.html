@@ -11,7 +11,7 @@
   <tbody>
     <tr *ngFor="let municipality of municipalities">
       <td>{{ municipality.name }}</td>
-      <td>{{ municipality.department.name }}</td>
+      <td>{{ municipality.department?.name }}</td> <!-- Se usa el operador '?' para manejar posibles valores nulos -->
       <td>
         <button (click)="editMunicipality(municipality.id)">Editar</button>
         <button (click)="deleteMunicipality(municipality.id)">Eliminar</button>
@@ -20,17 +20,26 @@
   </tbody>
 </table>
 
+<div>
+  <button (click)="prevPage()" [disabled]="page === 0">Página Anterior</button>
+  <button (click)="nextPage()">Siguiente Página</button>
+</div>
+
+<!-- Formulario para crear o editar municipios -->
 <form (submit)="saveMunicipality()">
   <h3>{{ editingMunicipality ? 'Editar Municipio' : 'Agregar Municipio' }}</h3>
+  
   <div>
     <label>Nombre del Municipio:</label>
     <input type="text" [(ngModel)]="municipalityForm.name" name="name" required>
   </div>
+  
   <div>
     <label>Departamento:</label>
     <select [(ngModel)]="municipalityForm.departmentId" name="departmentId" required>
       <option *ngFor="let department of departments" [value]="department.id">{{ department.name }}</option>
     </select>
   </div>
+  
   <button type="submit">{{ editingMunicipality ? 'Actualizar' : 'Agregar' }}</button>
 </form>

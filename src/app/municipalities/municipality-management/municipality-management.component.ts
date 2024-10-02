@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MunicipalityService } from '../../services/municipality.service';
+import { DepartmentService } from 'src/app/services/department.service';
 
 @Component({
   selector: 'app-municipality-management',
@@ -14,17 +15,36 @@ export class MunicipalityManagementComponent implements OnInit {
     name: '',
     departmentId: null
   };
+  page: number = 0;
+  selectedMunicipalityId: number | null = null;  // <--- Añadimos la propiedad aquí
 
-  constructor(private municipalityService: MunicipalityService) { }
+  constructor(private municipalityService: MunicipalityService, private departmentService: DepartmentService) { }
 
   ngOnInit(): void {
     this.loadMunicipalities();
+    this.loadDepartments();
   }
 
   loadMunicipalities() {
-    this.municipalityService.getAllMunicipalities().subscribe(data => {
+    this.municipalityService.getAllMunicipalities(this.page).subscribe(data => {
       this.municipalities = data.content;
     });
+  }
+
+  loadDepartments() {
+    this.departmentService.getAllDepartments().subscribe(data => {
+      this.departments = data.content;
+    });
+  }
+
+  nextPage() {
+    this.page++;
+    this.loadMunicipalities();
+  }
+
+  prevPage() {
+    this.page--;
+    this.loadMunicipalities();
   }
 
   deleteMunicipality(id: number) {
@@ -36,21 +56,48 @@ export class MunicipalityManagementComponent implements OnInit {
   saveMunicipality() {
     if (this.editingMunicipality) {
       const departmentId = this.municipalityForm.departmentId ?? 0; // Asignar un valor por defecto si es null
-      this.municipalityService.updateMunicipality(departmentId, this.municipalityForm).subscribe(() => {
+      this.municipalityService.updateMunicipality(this.selectedMunicipalityId as number, this.municipalityForm).subscribe(() => {
         this.loadMunicipalities();
+        this.resetForm();
       });
     } else {
       this.municipalityService.createMunicipality(this.municipalityForm).subscribe(() => {
         this.loadMunicipalities();
+        this.resetForm();
       });
     }
   }
+
   editMunicipality(id: number) {
     const municipality = this.municipalities.find(m => m.id === id);
     if (municipality) {
-        this.municipalityForm.name = municipality.name;
-        this.municipalityForm.departmentId = municipality.departmentId;
-        this.editingMunicipality = true;
+      this.selectedMunicipalityId = municipality.id;  // <--- Aquí asignamos el ID del municipio seleccionado
+      this.municipalityForm.name = municipality.name;
+      this.municipalityForm.departmentId = municipality.departmentId;
+      this.editingMunicipality = true;
     }
-}
+  }
+
+  updateMunicipality() {
+    if (this.selectedMunicipalityId) {
+      const municipalityData = {
+        name: this.municipalityForm.name,
+        departmentId: this.municipalityForm.departmentId
+      };
+
+      this.municipalityService.updateMunicipality(this.selectedMunicipalityId, municipalityData)
+        .subscribe(response => {
+          console.log("Municipio actualizado", response);
+          this.loadMunicipalities();  // Recargar la lista de municipios tras la actualización
+        }, error => {
+          console.error("Error al actualizar municipio", error);
+        });
+    }
+  }
+
+  resetForm() {
+    this.municipalityForm = { name: '', departmentId: null };
+    this.selectedMunicipalityId = null;
+    this.editingMunicipality = false;
+  }
 }

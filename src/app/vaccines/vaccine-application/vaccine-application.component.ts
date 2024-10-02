@@ -42,7 +42,7 @@ export class VaccineApplicationComponent implements OnInit {
         childId: this.selectedChildId,
         vaccineId: this.selectedVaccineId
       };
-      this.vaccineService.applyVaccine(data).subscribe(response => {
+      this.childService.applyVaccine(data).subscribe(response => {
         this.loadAppliedVaccines();
       }, error => {
         console.error('Error applying vaccine:', error);
