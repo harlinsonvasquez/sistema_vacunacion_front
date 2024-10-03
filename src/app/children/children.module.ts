@@ -5,11 +5,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ChildrenRoutingModule } from './children-routing.module';
 import { ChildrenManagementComponent } from './children-management/children-management.component';
+import { VaccinationByMunicipalityComponent } from '../vaccination-by-municipality/vaccination-by-municipality.component';
 
 
 @NgModule({
   declarations: [
-    ChildrenManagementComponent
+    ChildrenManagementComponent,
+    VaccinationByMunicipalityComponent
   ],
   imports: [
     CommonModule,

@@ -2,9 +2,14 @@
 
 <div class="filter">
   <label for="municipalityFilter">Filtrar por Municipio</label>
-  <select [formControlName]="'municipalityId'" required>
+  <select (change)="filterChildrenByMunicipality()" [(ngModel)]="selectedMunicipality" required>
     <option *ngFor="let municipality of municipalities" [value]="municipality.id">{{ municipality.name }}</option>
   </select>
+</div>
+
+<!-- Coloca el botón en su propio contenedor -->
+<div class="button-container">
+  <button (click)="goToVaccinationByMunicipality()">Vacunación por Municipio</button>
 </div>
 
 <table>
@@ -18,14 +23,15 @@
   </thead>
   <tbody>
     <tr *ngFor="let child of children">
-      <td>{{ child.name }}</td>
-      <td>{{ child.birthDate | date }}</td>
-      <td>{{ child.municipality.name }}</td>
+      <td>{{ child?.name }}</td> 
+      <td>{{ child?.birthDate | date }}</td>
+      <td *ngIf="child.municipalityName">{{ child.municipalityName }}</td>
+
       <td>
-          <button (click)="editChild(child.id)">Editar</button>
-          <button (click)="deleteChild(child.id)">Eliminar</button>
+        <button (click)="editChild(child.id)" *ngIf="child">Editar</button>
+        <button (click)="deleteChild(child.id)" *ngIf="child">Eliminar</button>
       </td>
-  </tr>
+    </tr>
   </tbody>
 </table>
 
@@ -36,19 +42,23 @@
 
 <form [formGroup]="childForm" (ngSubmit)="saveChild()">
   <h3>{{ editingChild ? 'Editar Niño' : 'Agregar Niño' }}</h3>
+  
   <div>
     <label>Nombre:</label>
     <input type="text" formControlName="name" required>
   </div>
+  
   <div>
     <label>Fecha de Nacimiento:</label>
     <input type="date" formControlName="birthDate" required>
   </div>
+  
   <div>
     <label>Municipio:</label>
-    <select [formControlName]="'municipalityId'" required>
-        <option *ngFor="let municipality of municipalities" [value]="municipality.id">{{ municipality.name }}</option>
+    <select formControlName="municipalityId" required>
+      <option *ngFor="let municipality of municipalities" [value]="municipality.id">{{ municipality.name }}</option>
     </select>
-</div>
+  </div>
+  
   <button type="submit">{{ editingChild ? 'Actualizar' : 'Agregar' }}</button>
 </form>

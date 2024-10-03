@@ -36,5 +36,10 @@ export class ChildService {
   applyVaccine(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/applyVaccine`, data);
   }
+  getVaccinatedChildrenByMunicipality(municipalityId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/municipality/${municipalityId}/vaccinated`);
+  }
+  
+  
 }
 

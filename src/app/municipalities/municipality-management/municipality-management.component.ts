@@ -59,7 +59,7 @@ export class MunicipalityManagementComponent implements OnInit {
 
   saveMunicipality() {
     if (this.editingMunicipality) {
-      const departmentId = this.municipalityForm.departmentId ?? 0; // Asignar un valor por defecto si es null
+      const departmentId = this.municipalityForm.departmentId ?? 0; 
       this.municipalityService.updateMunicipality(this.selectedMunicipalityId as number, this.municipalityForm).subscribe(() => {
         this.loadMunicipalities();
         this.resetForm();
@@ -75,7 +75,7 @@ export class MunicipalityManagementComponent implements OnInit {
   editMunicipality(id: number) {
     const municipality = this.municipalities.find(m => m.id === id);
     if (municipality) {
-      this.selectedMunicipalityId = municipality.id;  // <--- Aquí asignamos el ID del municipio seleccionado
+      this.selectedMunicipalityId = municipality.id;  
       this.municipalityForm.name = municipality.name;
       this.municipalityForm.departmentId = municipality.departmentId;
       this.editingMunicipality = true;
@@ -92,7 +92,7 @@ export class MunicipalityManagementComponent implements OnInit {
       this.municipalityService.updateMunicipality(this.selectedMunicipalityId, municipalityData)
         .subscribe(response => {
           console.log("Municipio actualizado", response);
-          this.loadMunicipalities();  // Recargar la lista de municipios tras la actualización
+          this.loadMunicipalities();  
         }, error => {
           console.error("Error al actualizar municipio", error);
         });

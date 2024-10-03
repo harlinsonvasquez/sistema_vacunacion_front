@@ -16,6 +16,17 @@ h1 {
   margin-bottom: 1em;
 }
 
+/* Filtro y botón */
+.filter,
+.button-container {
+  margin-bottom: 20px;
+}
+
+/* Botón alineado */
+.button-container {
+  text-align: left;
+}
+
 /* Tabla de niños */
 table {
   width: 100%;
@@ -70,7 +81,7 @@ form label {
 
 form select,
 form input {
-  width: 100%;
+  width: 98%;
   max-width: 100%;
   padding: 8px;
   margin-bottom: 10px;
@@ -119,6 +130,10 @@ form button:hover {
 
   h1 {
     font-size: 1.5em;
+  }
+
+  .button-container {
+    text-align: center;  /* Centra el botón en pantallas pequeñas */
   }
 
   /* Ajuste de la tabla para móviles */

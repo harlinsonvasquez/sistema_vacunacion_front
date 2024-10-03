@@ -1,0 +1,28 @@
+<h1>Niños Vacunados por Municipio</h1>
+
+<div class="filter">
+  <label for="municipalityFilter">Seleccione un Municipio</label>
+  <select (ngModelChange)="filterVaccinatedChildrenByMunicipality()" [(ngModel)]="selectedMunicipality" required>
+    <option *ngFor="let municipality of municipalities" [value]="municipality.id">{{ municipality.name }}</option>
+  </select>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Fecha de Nacimiento</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let child of filteredVaccinatedChildren">
+      <td>{{ child.name }}</td>
+      <td>{{ child.birthDate | date }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="pagination">
+  <button (click)="previousPage()">Anterior</button>
+  <button (click)="nextPage()">Siguiente</button>
+</div>
