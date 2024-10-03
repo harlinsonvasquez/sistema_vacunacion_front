@@ -1,110 +1,166 @@
 /* Estilo general */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Títulos */
+h1 {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+/* Tabla de niños */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+/* Botones de acción */
+button {
+  padding: 8px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button.delete {
+  background-color: #f44336;
+}
+
+button.delete:hover {
+  background-color: #d32f2f;
+}
+
+/* Formularios */
+form {
+  margin-top: 20px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+form select,
+form input {
+  width: 100%;
+  max-width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form button {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
+/* Paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  margin: 0 5px;
+  background-color: #4CAF50;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #ddd;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  body {
+    margin: 10px;
   }
-  
-  /* Contenedor principal */
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  /* Títulos */
+
   h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 1.5em;
   }
-  
-  /* Tabla de niños */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  
-    th, td {
-      padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-  
-    th {
-      background-color: #f2f2f2;
-      color: #333;
-    }
+
+  /* Ajuste de la tabla para móviles */
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
   }
-  
-  /* Botones de acción */
-  button {
-    padding: 8px 12px;
-    background-color: #4CAF50;
-    color: white;
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    margin-bottom: 15px;
+  }
+
+  td {
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
     border: none;
-    cursor: pointer;
-    margin-right: 5px;
-  
-    &:hover {
-      background-color: #45a049;
-    }
-  
-    &.delete {
-      background-color: #f44336;
-  
-      &:hover {
-        background-color: #d32f2f;
-      }
-    }
+    border-bottom: 1px solid #eee;
   }
-  
-  /* Formularios */
-  form {
-    margin-top: 20px;
-  
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
-  
-    input, select {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-  
-    button {
-      width: 100%;
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-  
-      &:hover {
-        background-color: #45a049;
-      }
-    }
+
+  td::before {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    content: attr(data-label);
+    font-weight: bold;
   }
-  
-  /* Paginación */
-  .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  
-    button {
-      padding: 8px 16px;
-      margin: 0 5px;
-      background-color: #f2f2f2;
-      border: 1px solid #ccc;
-      cursor: pointer;
-  
-      &:hover {
-        background-color: #ddd;
-      }
-    }
+
+  /* Botones */
+  button {
+    width: 100%;
+    margin-bottom: 10px;
   }
-  
+}

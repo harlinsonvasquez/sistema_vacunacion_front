@@ -16,7 +16,8 @@ export class MunicipalityManagementComponent implements OnInit {
     departmentId: null
   };
   page: number = 0;
-  selectedMunicipalityId: number | null = null;  // <--- Añadimos la propiedad aquí
+  selectedMunicipalityId: number | null = null;  
+  message: string = ''; 
 
   constructor(private municipalityService: MunicipalityService, private departmentService: DepartmentService) { }
 
@@ -48,8 +49,11 @@ export class MunicipalityManagementComponent implements OnInit {
   }
 
   deleteMunicipality(id: number) {
-    this.municipalityService.deleteMunicipality(id).subscribe(() => {
-      this.loadMunicipalities();
+    this.municipalityService.deleteMunicipality(id).subscribe(response => {
+      this.message = response.message;  
+      this.loadMunicipalities();  
+    }, error => {
+      this.message = 'Error al eliminar el municipio';  
     });
   }
 

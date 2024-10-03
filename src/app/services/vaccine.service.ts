@@ -10,7 +10,7 @@ export class VaccineService {
 
   constructor(private http: HttpClient) { }
 
-  getAllVaccines(page: number = 0, size: number = 10): Observable<any> {
+  getAllVaccines(page: number = 0, size: number = 100): Observable<any> {
     return this.http.get(`${this.apiUrl}?page=${page}&size=${size}`);
   }
 

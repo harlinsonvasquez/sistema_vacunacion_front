@@ -13,7 +13,7 @@ export class ChildService {
   getAllChildren(page: number = 0, size: number = 10): Observable<any> {
     return this.http.get(`${this.apiUrl}/getAllChildren?page=${page}&size=${size}`);
   }
-
+  
   createChild(child: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/create`, child);
   }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ChildrenRoutingModule } from './children-routing.module';
 import { ChildrenManagementComponent } from './children-management/children-management.component';
@@ -13,7 +14,8 @@ import { ChildrenManagementComponent } from './children-management/children-mana
   imports: [
     CommonModule,
     ChildrenRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ChildrenModule { }

@@ -13,6 +13,9 @@ export class MunicipalityService {
   getAllMunicipalities(page: number = 0, size: number = 10): Observable<any> {
     return this.http.get(`${this.apiUrl}?page=${page}&size=${size}`);
   }
+  getAllMunicipalities1(page: number = 0, size: number = 264): Observable<any> {
+    return this.http.get(`${this.apiUrl}?page=${page}&size=${size}`);
+  }
 
   createMunicipality(municipality: any): Observable<any> {
     return this.http.post(`${this.apiUrl}`, municipality);
