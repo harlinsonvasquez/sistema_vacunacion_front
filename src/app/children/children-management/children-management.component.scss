@@ -169,7 +169,9 @@ form button:hover {
     width: 45%;
     padding-right: 10px;
     white-space: nowrap;
+
     content: attr(data-label);
+    
     font-weight: bold;
   }
 
